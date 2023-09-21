@@ -1,7 +1,8 @@
-package com.barissuna.foodbook
+package com.barissuna.foodbook.view
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import com.barissuna.foodbook.R
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
