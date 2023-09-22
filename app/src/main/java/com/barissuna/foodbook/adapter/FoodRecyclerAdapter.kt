@@ -3,11 +3,14 @@ package com.barissuna.foodbook.adapter
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.RecyclerView
 import com.barissuna.foodbook.R
 import com.barissuna.foodbook.model.Food
+import com.barissuna.foodbook.util.downloadImage
+import com.barissuna.foodbook.util.makePlaceHolder
 import com.barissuna.foodbook.view.FoodListFragmentDirections
 
 class FoodRecyclerAdapter(val foodList:ArrayList<Food>) : RecyclerView.Adapter<FoodRecyclerAdapter.FoodViewHolder>()  {
@@ -34,6 +37,10 @@ class FoodRecyclerAdapter(val foodList:ArrayList<Food>) : RecyclerView.Adapter<F
             val action = FoodListFragmentDirections.actionFoodListFragmentToFoodDetailFragment(0)
             Navigation.findNavController(it).navigate(action)
         }
+
+        holder.itemView.findViewById<ImageView>(R.id.imageView).downloadImage(foodList.get(position).image,
+            makePlaceHolder(holder.itemView.context)
+        )
     }
 
     fun updateFoodList(newFoodList : List<Food>){

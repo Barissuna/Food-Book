@@ -40,6 +40,17 @@ class FoodListFragment : Fragment() {
 
         binding.foodListRecycler.layoutManager = LinearLayoutManager(context)
         binding.foodListRecycler.adapter = recyclerFoodAdapter
+
+        binding.swipeRefreshLayout.setOnRefreshListener {
+            binding.foodLoading.visibility = View.VISIBLE
+            binding.foodErrorMessage.visibility = View.GONE
+            binding.foodListRecycler.visibility = View.GONE
+            viewModel.refreshData()
+            binding.swipeRefreshLayout.isRefreshing = false
+
+        }
+
+
         observeLiveData()
     }
 
