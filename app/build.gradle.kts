@@ -51,7 +51,8 @@ dependencies {
     val glideVersion = "4.11.0"
     val rxJavaVersion = "2.2.8"
     val rxAndroidVersion = "2.1.1"
-    val roomVersion = "2.5.2"
+    val room_version = "2.5.2"
+    val preference_version = "1.2.1"
 
     implementation("androidx.core:core-ktx:1.12.0")
     implementation("androidx.appcompat:appcompat:1.6.1")
@@ -64,9 +65,9 @@ dependencies {
     implementation("androidx.navigation:navigation-fragment-ktx:$nav_version")
     implementation("androidx.navigation:navigation-ui-ktx:$nav_version")
     implementation ("android.arch.lifecycle:extensions:$lifeCycleExtensionVersion")
-    implementation ("androidx.room:room-runtime:$roomVersion")
+    implementation ("androidx.room:room-runtime:$room_version")
     implementation ("androidx.legacy:legacy-support-v4:1.0.0")
-    implementation ("androidx.room:room-ktx:$roomVersion")
+    implementation ("androidx.room:room-ktx:$room_version")
     implementation ("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.6.4")
     implementation ("com.google.android.material:material:1.9.0")
     implementation ("com.squareup.retrofit2:retrofit:$retrofitVersion")
@@ -75,5 +76,7 @@ dependencies {
     implementation ("io.reactivex.rxjava2:rxjava:$rxJavaVersion")
     implementation ("io.reactivex.rxjava2:rxandroid:$rxAndroidVersion")
     implementation ("com.github.bumptech.glide:glide:$glideVersion")
+    annotationProcessor ("androidx.room:room-compiler:$room_version")
+    implementation("androidx.preference:preference-ktx:$preference_version")
 
 }
