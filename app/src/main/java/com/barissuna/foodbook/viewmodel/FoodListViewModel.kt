@@ -1,8 +1,8 @@
 package com.barissuna.foodbook.viewmodel
 
 import android.app.Application
+import android.widget.Toast
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
 import com.barissuna.foodbook.model.Food
 import com.barissuna.foodbook.servis.FoodAPIService
 import com.barissuna.foodbook.servis.FoodDatabase
@@ -22,10 +22,31 @@ class FoodListViewModel(app:Application) : BaseViewModel(app) {
     private val foodApiService = FoodAPIService()
     private val disposable = CompositeDisposable()
     private val specialSharedPreferences = SpecialSharedPreferences(getApplication())
+    private val updateTime = 10 * 60 * 1000 * 1000 * 1000L
 
     fun refreshData(){
+        val recordedTime = specialSharedPreferences.getTime()
+        if(recordedTime !=null && recordedTime !=0L && System.nanoTime() - recordedTime < updateTime){
+            getDataFromSQLite()
+        }else{
+            getDataFromInternet()
+        }
+
+    }
+
+    private fun getDataFromSQLite(){
+        foodLoading.value = true
+        launch {
+            val foodList=FoodDatabase(getApplication()).foodDao().getAllFood()
+            showFoods(foodList)
+            Toast.makeText(getApplication(),"Taken from Database",Toast.LENGTH_LONG).show()
+        }
+    }
+
+    fun refreshFromInternet(){
         getDataFromInternet()
     }
+
 
     private fun getDataFromInternet(){
         foodLoading.value = true
@@ -37,6 +58,7 @@ class FoodListViewModel(app:Application) : BaseViewModel(app) {
                 .subscribeWith(object : DisposableSingleObserver<List<Food>>(){
                     override fun onSuccess(t: List<Food>) {
                         sqliteSave(t)
+                        Toast.makeText(getApplication(),"Taken from Internet",Toast.LENGTH_LONG).show()
                     }
 
                     override fun onError(e: Throwable) {

@@ -33,4 +33,6 @@ class SpecialSharedPreferences {
         }
     }
 
+    fun getTime() = sharedPreferences?.getLong("TIME",0)
+
 }

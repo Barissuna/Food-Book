@@ -45,7 +45,7 @@ class FoodListFragment : Fragment() {
             binding.foodLoading.visibility = View.VISIBLE
             binding.foodErrorMessage.visibility = View.GONE
             binding.foodListRecycler.visibility = View.GONE
-            viewModel.refreshData()
+            viewModel.refreshFromInternet()
             binding.swipeRefreshLayout.isRefreshing = false
 
         }

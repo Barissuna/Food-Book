@@ -2,11 +2,22 @@
 <layout xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:android="http://schemas.android.com/apk/res/android">
 
+    <data>
+        <variable
+            name="food"
+            type="com.barissuna.foodbook.model.Food" />
+
+        <variable
+            name="listener"
+            type="com.barissuna.foodbook.adapter.FoodClickListener" />
+    </data>
+
     <LinearLayout
 
         android:id="@+id/recyclerView"
         android:layout_width="match_parent"
         android:layout_height="150dp"
+        android:onClick="@{listener::foodClicked}"
         android:orientation="horizontal">
 
         <ImageView
@@ -15,7 +26,7 @@
             android:layout_height="match_parent"
             android:layout_margin="3dp"
             android:layout_weight="2"
-
+            android:downloadImageXML="@{food.image}"
             app:srcCompat="@drawable/ic_launcher_background">
 
         </ImageView>
@@ -28,12 +39,19 @@
             android:orientation="vertical">
 
             <TextView
+                android:id="@+id/food_uuid"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:visibility="gone"
+                android:text="@{String.valueOf(food.uuid)}"></TextView>
+
+            <TextView
                 android:id="@+id/name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_margin="5dp"
-                android:text="deneme"
+                android:text="@{food.name}"
                 android:textSize="20sp"
                 android:textStyle="bold"></TextView>
 
@@ -43,7 +61,7 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_margin="5dp"
-                android:text="deneme"
+                android:text="@{food.calory}"
                 android:textSize="17sp"></TextView>
         </LinearLayout>
 

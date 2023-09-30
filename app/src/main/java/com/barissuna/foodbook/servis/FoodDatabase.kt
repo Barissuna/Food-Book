@@ -6,7 +6,7 @@ import androidx.room.Room
 import androidx.room.RoomDatabase
 import com.barissuna.foodbook.model.Food
 
-@Database(entities = arrayOf(Food::class), version = 1)
+@Database(entities =  arrayOf(Food::class), version = 1)
 abstract class FoodDatabase : RoomDatabase() {
 
     abstract fun foodDao() : FoodDAO
